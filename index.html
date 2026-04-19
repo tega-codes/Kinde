@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Noir - Timeless Luxury Redefined</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a1a1a;
+            background: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 4rem;
+        }
+
+        nav.scrolled .nav-logo {
+            color: #1a1a1a;
+        }
+
+        nav.scrolled .nav-links a {
+            color: #1a1a1a;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            color: #ffffff;
+            background-image: url('hero/The Tower Bridge-London_- _ London city view, Tower bridge london, London wallpaper.jfif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content .tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            color: #D4AF37;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #D4AF37;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid #D4AF37;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #D4AF37;
+            transform: scale(1.05);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Collections Section */
+        .collections {
+            min-height: 100vh;
+            padding: 6rem 4rem;
+            background: #ffffff;
+            position: relative;
+            z-index: 20;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 4rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #f5f5f5;
+            overflow: hidden;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            background: #e8e8e8;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .product-info p {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about {
+            min-height: 100vh;
+            padding: 6rem 4rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 20;
+        }
+
+        .about-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            color: #D4AF37;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: #e0e0e0;
+        }
+
+        /* Contact Section */
+        .contact {
+            min-height: 100vh;
+            padding: 6rem 4rem;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 20;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .contact-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .contact-container .section-subtitle {
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            background: #f9f9f9;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: #1a1a1a;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: #1a1a1a;
+            color: #D4AF37;
+            border: 2px solid #1a1a1a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: transparent;
+            color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 3rem 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            border-top: 1px solid #D4AF37;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #D4AF37;
+        }
+
+        .social-icons {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: #D4AF37;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #D4AF37;
+            color: #0a0a0a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            nav.scrolled {
+                padding: 1rem 2rem;
+            }
+
+            .nav-logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 1.1rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+
+            .collections {
+                padding: 4rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about {
+                padding: 4rem 2rem;
+            }
+
+            .about-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact {
+                padding: 4rem 2rem;
+            }
+
+            .contact-container h2 {
+                font-size: 2.5rem;
+            }
+
+            footer {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.7rem;
+                letter-spacing: 0.5px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .hero-content .tagline {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .hero-content p {
+                font-size: 0.85rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 0.8rem;
+            }
+
+            .collections {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
+            .about {
+                padding: 2rem 1rem;
+            }
+
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-content p {
+                font-size: 0.95rem;
+            }
+
+            .contact {
+                padding: 2rem 1rem;
+            }
+
+            .contact-container h2 {
+                font-size: 1.8rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop preload="auto" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect fill='%23000'/%3E%3C/svg%3E">
+            <source src="videos/animations.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-logo">ELEGANCE NOIR</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>ELEGANCE NOIR</h1>
+            <p class="tagline">Timeless Luxury Redefined</p>
+            <p>Where sophistication meets innovation. Discover our curated collection of timeless pieces that define modern luxury.</p>
+            <button class="cta-button" onclick="document.getElementById('collections').scrollIntoView({behavior: 'smooth'});">
+                Discover Collection
+            </button>
+
+            <div class="scroll-indicator">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="collections">
+        <h2 class="section-title">Our Collections</h2>
+        <p class="section-subtitle">Exclusive & Luxurious</p>
+
+        <div class="collection-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <img src="products/Bu Babalar Günü'ne özel hediye arayışında olanlar için adres belli_ Hyman!😎_Tarz sahibi babalar için doğru yerdesin, hemen hediyeni seç!👔__#babalargunu #fatherday #erkekgi̇yi̇m.jfif" alt="Ethereal Elegance Collection" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Ethereal Elegance</h3>
+                    <p>Delicate sophistication with modern edge</p>
+                    <div class="product-price">$2,850</div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <img src="products/download (88).jfif" alt="Midnight Allure Collection" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Midnight Allure</h3>
+                    <p>Bold statements in timeless design</p>
+                    <div class="product-price">$3,200</div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <img src="products/Embrace Timeless Elegance with 2024's Top Old Money Outfits for Men_ A Guide to Sophisticated Style.jfif" alt="Golden Opulence Collection" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Golden Opulence</h3>
+                    <p>Radiant luxury in every detail</p>
+                    <div class="product-price">$3,500</div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <img src="products/isaia red coral.jfif" alt="Silhouette Series Collection" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Silhouette Series</h3>
+                    <p>Minimalist perfection redefined</p>
+                    <div class="product-price">$2,950</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content fade-in">
+            <h2>About Elegance Noir</h2>
+            <p>
+                Since our inception, we have been dedicated to crafting timeless pieces that transcend trends and seasons. 
+                Each garment is meticulously designed and constructed using the finest materials, embodying our commitment 
+                to uncompromising quality and sophistication. We believe luxury is not about excess—it's about the art of 
+                subtlety, the power of silence, and the elegance that speaks for itself. Our philosophy centers on creating 
+                pieces that become cherished heirlooms, worn and celebrated for generations to come.
+            </p>
+            <p>
+                At Elegance Noir, we marry heritage craftsmanship with contemporary vision, creating a collection that 
+                appeals to the discerning individual who understands that true luxury is timeless.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <p class="section-subtitle">We'd Love to Hear From You</p>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Follow us on Instagram">
+                <span>f</span>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter" title="Follow us on Twitter">
+                <span>𝕏</span>
+            </a>
+            <a href="https://pinterest.com" target="_blank" aria-label="Pinterest" title="Follow us on Pinterest">
+                <span>P</span>
+            </a>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="#collections">Women's</a></li>
+                    <li><a href="#collections">Men's</a></li>
+                    <li><a href="#collections">Accessories</a></li>
+                    <li><a href="#collections">Limited Edition</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elegance Noir. All rights reserved. | Timeless Luxury Redefined</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll navigation
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Form handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Simple validation
+            if (name && email && message) {
+                alert(`Thank you, ${name}! Your message has been received. We'll contact you shortly at ${email}.`);
+                document.getElementById('contactForm').reset();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Optional: Add any escape behavior
+            }
+        });
+
+        // Parallax effect on scroll (subtle)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const videoOverlay = document.querySelector('.video-overlay');
+            // Subtle parallax - very light effect to maintain video visibility
+            videoOverlay.style.transform = `translateY(${scrolled * 0.05}px)`;
+        });
+
+        // Accessibility: Tab navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('focus-visible');
+            }
+        });
+
+        document.addEventListener('click', () => {
+            document.body.classList.remove('focus-visible');
+        });
+
+        // Preload video
+        const video = document.querySelector('video');
+        if (video) {
+            video.addEventListener('loadedmetadata', () => {
+                console.log('Video loaded and ready');
+            });
+        }
+
+        // Window resize handler for responsive behavior
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // Recheck layout
+            }, 250);
+        });
+    </script>
+</body>
+</html>
